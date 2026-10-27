@@ -1,0 +1,65 @@
+[workspace]
+authors   = ["Kyle Shannon <kshannon@ucsd.edu>", "Jiesen Zhang <jiz147@ucsd.edu>", "Douglas Nitz <dnitz@ucsd.edu>"]
+channels  = ["conda-forge"]
+name      = "subicular-axis-tuning-model"
+platforms = ["osx-arm64", "linux-64"]
+version   = "0.1.0"
+
+
+###################### ======== DEPENDENCIES ======== ######################
+[dependencies]
+# Core ML
+python  = "=3.12"
+pytorch = ">=2.1,<3"
+numpy   = ">=1.26"
+scipy   = ">=1.11"
+pandas  = ">=2"
+tqdm    = ">=4.66"
+
+# Data I/O
+h5py     = ">=3.10"   # for MATLAB v7.3 .mat files
+pyarrow  = ">=14"     # the full package: Parquet frames and CSV
+
+# Visualization
+matplotlib = ">=3.8"
+seaborn    = ">=0.13"
+
+# Validation
+pydantic = ">=2.5"
+pyyaml = ">=6"
+
+[pypi-dependencies]
+ratinabox = ">=1"
+
+
+###################### ======== DEV / CUDA FEATURES ======== ######################
+[feature.dev.dependencies]
+pip          = "*"
+pytest       = ">=7.4"
+pytest-cov   = "*"
+pytest-xdist = "*"
+jupyter      = "*"
+ipython      = "*"
+ipytest      = "*"
+nbformat     = "*"
+nbstripout   = "*"
+papermill    = ">=2.7,<3"  # runs a notebook headless
+
+[feature.dev.pypi-dependencies]
+scienceplots = ">=2"
+
+# ---- cuda feature: GPU builds, Linux clusters etc. ----
+[feature.cuda]
+platforms = ["linux-64"]
+
+[feature.cuda.system-requirements]
+cuda = "12"
+
+[feature.cuda.dependencies]
+pytorch = { version = ">=2.1,<3", build = "cuda*" }
+
+
+###################### ======== ENVS ======== ######################
+[environments]
+default   = { features = ["dev"] }
+cuda      = { features = ["dev", "cuda"] }
