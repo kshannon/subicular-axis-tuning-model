@@ -30,6 +30,7 @@ pyyaml = ">=6"
 
 [pypi-dependencies]
 ratinabox = ">=1"
+subicular-axis-tuning-model = { path = ".", editable = true }
 
 
 ###################### ======== DEV / CUDA FEATURES ======== ######################
