@@ -60,6 +60,12 @@ cuda = "12"
 pytorch = { version = ">=2.1,<3", build = "cuda*" }
 
 
+###################### ======== TASKS ======== ######################
+[tasks]
+# Lab data converter (scripts/transform_lab_data/): MATLAB files to CSV and Parquet
+transform-lab-data = "python -m scripts.transform_lab_data"
+
+
 ###################### ======== ENVS ======== ######################
 [environments]
 default   = { features = ["dev"] }

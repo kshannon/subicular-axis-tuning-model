@@ -414,6 +414,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a8/9c/5e49f71504351107bd38eee99cc39db4b81b63f3d4f5b04af49555b3fd88/ratinabox-1.15.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/ff/6469a5cabf230ebc94f927246874136098dde1aacc9328bc40dceb24ba13/scienceplots-2.2.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ad/87/6842e4c996914a47b6bfd3ef14a543e67e993f86a9ea5679c34efc9314ab/shapely-2.2.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
+      - pypi: ./
   default:
     channels:
     - url: https://conda.anaconda.org/conda-forge/
@@ -800,6 +801,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a8/9c/5e49f71504351107bd38eee99cc39db4b81b63f3d4f5b04af49555b3fd88/ratinabox-1.15.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/ff/6469a5cabf230ebc94f927246874136098dde1aacc9328bc40dceb24ba13/scienceplots-2.2.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ad/87/6842e4c996914a47b6bfd3ef14a543e67e993f86a9ea5679c34efc9314ab/shapely-2.2.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
+      - pypi: ./
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/_openmp_mutex-4.5-8_kmp_llvm.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/_python_abi3_support-1.0-hd8ed1ab_3.conda
@@ -1128,6 +1130,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a8/9c/5e49f71504351107bd38eee99cc39db4b81b63f3d4f5b04af49555b3fd88/ratinabox-1.15.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5d/ff/6469a5cabf230ebc94f927246874136098dde1aacc9328bc40dceb24ba13/scienceplots-2.2.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/02/96/5c48977168f32de067bfafce7f584dd04becf152152bf088636cc034828e/shapely-2.2.0-cp312-cp312-macosx_11_0_arm64.whl
+      - pypi: ./
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-8_kmp_llvm.conda
   build_number: 8
@@ -8515,6 +8518,12 @@ packages:
   - pkg:pypi/statsmodels?source=compressed-mapping
   size: 13076241
   timestamp: 1790033585410
+- pypi: ./
+  name: subicular-axis-tuning-model
+  version: 0.1.0
+  sha256: 1c78b891ce7ecb7f2b657d70ed89330f836800b72e9a03a358cea7e318239e58
+  requires_python: '>=3.12'
+  editable: true
 - conda: https://conda.anaconda.org/conda-forge/noarch/sympy-1.14.0-pyh2585a3b_106.conda
   sha256: 1c8057e6875eba958aa8b3c1a072dc9a75d013f209c26fd8125a5ebd3abbec0c
   md5: 32d866e43b25275f61566b9391ccb7b5

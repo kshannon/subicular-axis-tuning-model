@@ -1,8 +1,6 @@
 # subicular-axis-tuning-model
 
-Describing how axis tuning develops in subicular neural cells.
-
-This README a guide to running the project and to ensure maximum reproducibility/replicability.
+Follow this README to get started and recreate this project. We hop this ensures maximum reproducibility/replicability.
 
 ## Setup
 Install pixi for env control, which builds a `pixi.lock` and `.pixi/` resources.
@@ -29,19 +27,23 @@ There are two environments:
 - `default`: Python 3.12, PyTorch, NumPy, SciPy, pandas, matplotlib, seaborn, RatInABox, and the dev tools (pytest, Jupyter, nbstripout, papermill). Runs on Apple Silicon and Linux.
 - `cuda`: the same, with a GPU build of PyTorch. Linux only. Install with `pixi install -e cuda` and run with `pixi run -e cuda ...`.
 
-To add a package, add it to `pixi.toml` and run `pixi install`. That updates `pixi.lock`. Commit both files together.
+## Lab Data Transformation and Intitial Block Processing
 
-## Editor
+`scripts/transform_lab_data/` converts the lab's MATLAB tracking and analysis files into
+CSV tables and Parquet frames. It's a one-off script to prepare raw lab data.
 
-`.vscode/settings.json` points VS Code at the pixi Python and turns on pytest, Ruff and notebook formatting. `.vscode/extensions.json` lists the recommended extensions, VS Code offers to install them when the folder is opened.
+Setup, once:
 
-## Agents
+```bash
+cp configs/local.example.yaml configs/local.yaml
+```
 
-`AGENTS.md` tells coding agents how to work in this project: their role as a research collaborator, what they may do on their own, and what needs the researcher's approval. `CLAUDE.md` points Claude Code at it.
+Edit `configs/local.yaml`  to point `LAB_DATA` at the lab's raw data folder and `TRANSFORMED_LAB_DATA` at where the converted output should go. We offer different flavors of running this transformation depending on your use case:
 
-`docs/` holds the project's working record, which the agents read before acting:
-
-- `PROJECT_BRIEF.md`: the scientific question and the current plan.
-- `EXPERIMENT_PROTOCOL.md`: how experiments are validated and tested.
-- `RESEARCH_LOG.md`: what was run, what was found, and what was decided.
-- `MODELING_DECISIONS.md`: the modeling choices and why they were made.
+```bash
+pixi run transform-lab-data               # convert everything
+pixi run transform-lab-data -- --dry-run  # print what would convert and write, nothing written
+pixi run transform-lab-data -- --only NS14_rec27_20150219_001   # one session (or its prefix)
+pixi run transform-lab-data -- --sample 2 # the first 2 sessions per subject, in recording order
+pixi run pytest tests/transform_lab_data  # run the test suite for this script
+```

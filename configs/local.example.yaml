@@ -1,0 +1,4 @@
+# Copy this file to configs/local.yaml and fill out paths
+
+LAB_DATA: /path/to/the/lab/s/matlab/files # raw lab data in .matlab format
+TRANSFORMED_LAB_DATA: /path/to/write/csv/and/parquet/output # transformer script dumps .csv and .parquet here

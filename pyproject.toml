@@ -10,3 +10,6 @@ dependencies = []
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/subicular_axis"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
