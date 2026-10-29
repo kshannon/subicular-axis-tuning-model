@@ -1,4 +1,5 @@
 # Copy this file to configs/local.yaml and fill out paths
 
-LAB_DATA: /path/to/the/lab/s/matlab/files # raw lab data in .matlab format
+LAB_DATA: /path/to/the/labs/matlab/files # raw lab data in .matlab format
 TRANSFORMED_LAB_DATA: /path/to/write/csv/and/parquet/output # transformer script dumps .csv and .parquet here
+BLOCK_DATA: /path/to/write/block/datasets # build_blocks writes a new timestamped dataset folder here each run

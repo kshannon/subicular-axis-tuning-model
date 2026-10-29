@@ -65,6 +65,9 @@ pytorch = { version = ">=2.1,<3", build = "cuda*" }
 # Lab data converter (scripts/transform_lab_data/): MATLAB files to CSV and Parquet
 transform-lab-data = "python -m scripts.transform_lab_data"
 
+# Block builder (scripts/build_blocks/): transformed tables to a new timestamped block dataset
+build-blocks = "python -m scripts.build_blocks"
+
 
 ###################### ======== ENVS ======== ######################
 [environments]

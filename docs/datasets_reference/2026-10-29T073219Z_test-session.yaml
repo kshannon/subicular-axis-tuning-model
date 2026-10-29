@@ -1,0 +1,16 @@
+# scripts/build_blocks/build_protocol.yaml
+# Edited by hand before each run of build-blocks. Every value here is copied
+# verbatim into docs/datasets_reference/<run-name>.yaml for that run, so this
+# file's CURRENT contents are not the historical record of any past build.
+# The matching file in docs/datasets_reference/ is.
+
+rat:            # NS14, NS15, NS16, or empty for all three
+conditions:     # any of: baseline, rot45, rot90
+  - baseline     # muscimol, acsf, dark and JL1HPCData sessions are never built, not a choice here
+  - rot45
+  - rot90
+
+pause_step_s: 0.5     # a gap in the tracking clock longer than this starts a pause cut
+jump_px: 40            # a single frame position jump over this many px starts a jump cut
+max_gap_frames: 180    # an LED loss stretch longer than this starts a gap cut (3 s at 60 Hz)
+min_block_s: 10         # a stretch shorter than this after cuts and margins is dropped
