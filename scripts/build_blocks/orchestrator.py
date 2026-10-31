@@ -225,7 +225,7 @@ def build_dataset(transformed_root, block_data_root, description, protocol_path,
             failed[session_id] = info["reason"]
             continue
         checks_by_session[session_id] = {"warnings": info["checks"], "cut_counts": info["cut_counts"],
-                                          "skipped_blocks": info["skipped_blocks"]}
+                                          "skipped_blocks": info["skipped_blocks"], "registration": info["registration"]}
         for epoch_name, counts in info["cut_counts"].items():
             cuts_rows.append({"session_id": session_id, "epoch": epoch_name, **counts})
         for block in blocks:

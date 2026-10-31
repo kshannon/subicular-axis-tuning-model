@@ -73,6 +73,12 @@ epochs tagged `baseline`, and a variant epoch tagged with one of `build_protocol
 `verdict` column reserved on every output row is for a person to exclude one by hand, later,
 without rebuilding.
 
+**register.py, the scale.** The track's pixels per metre is the span between the outermost occupancy
+peaks of the running frames along each room axis, divided by the distance between the centre lines
+of the opposite perimeter return corridors (the paper's envelope less one corridor width, 1.52 by
+1.17 m). On the real maze the outermost running is the rat's return around the perimeter, not the
+goal arms. The arena's scale is the track's times the parallax ratio.
+
 **register.py, the green box.** A rotation session's `variant` epoch does not get its own
 registration. The camera never moved between epochs, so the track epoch's own scale, rotation
 and offset are reused as they are. The variant epoch's own rotation is measured separately,
@@ -156,7 +162,10 @@ One file per kept block, one row per frame.
 
 ### `checks.json`
 
-One entry per session that built, keyed by `session_id`. `warnings` holds each epoch's
+One entry per session that built, keyed by `session_id`. `registration` holds the parameters that
+placed every block, by epoch: the scale, rotation and offset, and for the track its x and y scale
+estimates and `start_offset_measured_m`, how far the start site sits above the bottom perimeter
+corridor. `warnings` holds each epoch's
 `registration_warnings`, plus `heading` and `on_track`, each a `{status, detail}` map.
 `cut_counts` holds that session's `cuts.csv` rows, by epoch. `skipped_blocks` lists the blocks
 that failed `block_fails` or `rotation_mismatch_fail` and were never written, with why.

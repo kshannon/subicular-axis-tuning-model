@@ -50,13 +50,11 @@ CENTERLINE, REWARD_SITES = _centerline_and_sites()
 GOAL_NAMES = ("g_ee", "g_ew", "g_ww", "g_we")
 
 
-def centerline_extent():
+def perimeter_extent():
     """
-    The (x, y) extent in metres of the outbound centreline's bounding box, what the track scale is measured against.
+    The (x, y) distance in metres between the centre lines of opposite perimeter return corridors, the envelope less one corridor width: what the outermost running peaks span on the real maze, so what the track scale is measured against.
     """
-    xs = [p[0] for seg in CENTERLINE for p in (seg["p0"], seg["p1"])]
-    ys = [p[1] for seg in CENTERLINE for p in (seg["p0"], seg["p1"])]
-    return max(xs) - min(xs), max(ys) - min(ys)
+    return ENVELOPE[0] - CORRIDOR_WIDTH, ENVELOPE[1] - CORRIDOR_WIDTH
 
 
 def distance_to_centerline(x, y):

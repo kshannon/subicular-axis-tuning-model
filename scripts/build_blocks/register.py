@@ -108,9 +108,9 @@ def running_axes(frames, epoch, rotation):
 
 def track_scale(axes):
     """
-    Pixels per metre of the track: the mean of the two axis estimates, the span of the outermost occupancy peaks of the running frames along each room axis over the centreline's extent, and then each.
+    Pixels per metre of the track: the mean of the two axis estimates, the span of the outermost occupancy peaks of the running frames along each room axis (the perimeter return corridors) over the perimeter's extent, and then each.
     """
-    extent_x, extent_y = maze.centerline_extent()
+    extent_x, extent_y = maze.perimeter_extent()
     scale_x, scale_y = float(peak_span(axes[0]) / extent_x), float(peak_span(axes[1]) / extent_y)
     return (scale_x + scale_y) / 2, scale_x, scale_y
 

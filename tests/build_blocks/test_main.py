@@ -2,6 +2,8 @@
 The command line: build_protocol.yaml validation, --description required unless --dry-run, and that a real run's committed snapshot matches the BLOCK_DATA folder it describes.
 """
 
+import json
+
 import pytest
 
 import scripts.build_blocks.__main__ as entry
@@ -78,6 +80,8 @@ def test_dataset_registers_itself_under_its_own_name(tmp_path, monkeypatch, tran
     assert run_name.endswith("_test-run")
     assert (run_dirs[0] / "blocks.csv").is_file()
     assert (run_dirs[0] / "manifest.json").is_file()
+    checks = json.loads((run_dirs[0] / "checks.json").read_text())
+    assert checks and all("start_offset_measured_m" in entry["registration"]["track"] for entry in checks.values())
 
     reference_dir = repo_root / "docs" / "datasets_reference"
     assert (reference_dir / f"{run_name}.yaml").is_file()

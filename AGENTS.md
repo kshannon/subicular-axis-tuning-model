@@ -316,6 +316,8 @@ Consult docs/RESEARCH_LOG.md and docs/MODELING_DECISIONS.md before repeating an 
 
 Treat these documents as the current working record, not as infallible truth. If new evidence contradicts them, explain the discrepancy and recommend an update rather than silently ignoring either the evidence or the record.
 
+Data access. The lab's recordings and everything derived from them, the LAB_DATA, TRANSFORMED_LAB_DATA and BLOCK_DATA folders named in configs/local.yaml and anything under /Volumes, are read only by the researcher. Never read, move or rename configs/local.yaml. Before running any command, state what it reads and what it writes. A command that could resolve configs/local.yaml, including a listing, a dry run or a help mode, runs only with an explicit configuration pointing at synthetic data in a scratch folder, or does not run. Write the command for the researcher to run and work from the aggregates they paste back, never from rows of recordings.
+
 Follow any additional instructions in applicable nested AGENTS.md files. If instructions conflict, surface consequential conflicts rather than silently choosing a course that could alter the scientific objective.
 
 ## Final Operating Principle

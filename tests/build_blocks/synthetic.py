@@ -1,5 +1,5 @@
 """
-Synthetic frames and runs for register.py's tests: a rat running the maze's real outbound route, placed in pixels by the known inverse of register.to_room, so a test can assert the true rotation and scale come back out.
+Synthetic frames and runs for register.py's tests: a rat running the maze's real outbound route and returning around the perimeter, placed in pixels by the known inverse of register.to_room, so a test can assert the true rotation and scale come back out.
 """
 
 import numpy as np
@@ -27,6 +27,19 @@ def _route_waypoints(side):
     return [maze.REWARD_SITES["start"], t1, maze.CENTERLINE[cross]["p1"], maze.CENTERLINE[up]["p1"], maze.REWARD_SITES[goal]]
 
 
+def _return_waypoints(side):
+    """
+    The return from one side's outer goal around the perimeter: up to the top corridor, out to the side corridor, down it and along the bottom corridor to the start, four segments. On the real maze the perimeter corridors are the outermost running, so they are what track_scale's peaks find.
+    """
+    h = maze.CORRIDOR_WIDTH / 2.0
+    ex, ey = maze.ENVELOPE
+    x0, y0 = (maze.ROOM[0] - ex) / 2.0, (maze.ROOM[1] - ey) / 2.0
+    top, bottom = y0 + ey - h, y0 + h
+    goal = maze.REWARD_SITES["g_ee" if side == "east" else "g_ww"]
+    edge = x0 + ex - h if side == "east" else x0 + h
+    return [goal, (goal[0], top), (edge, top), (edge, bottom), maze.REWARD_SITES["start"]]
+
+
 def _route_positions(waypoints, frames_per_segment, dwell_frames):
     """
     The route's waypoints walked at a constant frames-per-segment pace, then held at the final waypoint for dwell_frames: a real rat pauses at a reward site or the start, which is what gives track_scale's peak finding a real density peak to find at each extreme.
@@ -44,7 +57,7 @@ def _route_positions(waypoints, frames_per_segment, dwell_frames):
 def oscillating_epoch(epoch_name, environment, condition, start_frame, rotation, scale=200.0, offset=(0.0, 0.0),
                        rate_hz=60, trips=6, frames_per_segment=15, dwell_frames=20):
     """
-    One epoch's frames and runs: the rat running out and back, alternating the east and west outbound routes so both room axes are fully covered, pausing at each end, at the given true pixel rotation and scale, labelled outbound (path 1) and return (path 9) runs.
+    One epoch's frames and runs: the rat running out and around the perimeter back to the start, alternating the east and west routes so both room axes are fully covered, pausing at each end, at the given true pixel rotation and scale, labelled outbound (path 1) and return (path 9) runs.
     """
     legs_per_trip, frames_per_leg = 2, frames_per_segment * 4 + dwell_frames
     legs = trips * legs_per_trip
@@ -52,8 +65,8 @@ def oscillating_epoch(epoch_name, environment, condition, start_frame, rotation,
     frame = np.arange(start_frame, start_frame + n, dtype=np.int64)
     room_x, room_y, runs = [], [], []
     for leg in range(legs):
-        waypoints = _route_waypoints("east" if (leg // legs_per_trip) % 2 == 0 else "west")
-        here = waypoints if leg % 2 == 0 else waypoints[::-1]
+        side = "east" if (leg // legs_per_trip) % 2 == 0 else "west"
+        here = _route_waypoints(side) if leg % 2 == 0 else _return_waypoints(side)
         x, y = _route_positions(here, frames_per_segment, dwell_frames)
         room_x.append(x)
         room_y.append(y)
