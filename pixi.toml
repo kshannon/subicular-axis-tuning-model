@@ -68,6 +68,12 @@ transform-lab-data = "python -m scripts.transform_lab_data"
 # Block builder (scripts/build_blocks/): transformed tables to a new timestamped block dataset
 build-blocks = "python -m scripts.build_blocks"
 
+# New experiment (scripts/new_experiment.sh): a timestamped folder under experiments/ from templates/
+new-experiment = "bash scripts/new_experiment.sh"
+
+# Block annotizer (scripts/block_annotizer/): step through a dataset's blocks, mark stretches of frames, give verdicts
+block-annotizer = "python -m scripts.block_annotizer"
+
 
 ###################### ======== ENVS ======== ######################
 [environments]

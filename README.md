@@ -42,13 +42,13 @@ Edit `configs/local.yaml`  to point `LAB_DATA` at the lab's raw data folder and 
 
 ```bash
 pixi run transform-lab-data               # convert everything
-pixi run transform-lab-data -- --dry-run  # print what would convert and write, nothing written
-pixi run transform-lab-data -- --only NS14_rec27_20150219_001   # one session (or its prefix)
-pixi run transform-lab-data -- --sample 2 # the first 2 sessions per subject, in recording order
+pixi run transform-lab-data --dry-run  # print what would convert and write, nothing written
+pixi run transform-lab-data --only NS14_rec27_20150219_001   # one session (or its prefix)
+pixi run transform-lab-data --sample 2 # the first 2 sessions per subject, in recording order
 pixi run pytest tests/transform_lab_data  # run the test suite for this script
 ```
 
-## Block Processing
+## Block Processing & Validating
 
 `scripts/build_blocks/` builds a block dataset from the transformed lab data tables. Each run
 writes a new timestamped dataset folder, never overwriting an earlier one.
@@ -62,4 +62,14 @@ pixi run build-blocks --dry-run                      # print which sessions woul
 pixi run build-blocks --description "first build"    # build a dataset
 pixi run build-blocks --only NS14_rec27_20150219_001 --description "one-session"   # best to use snake case
 pixi run pytest tests/build_blocks                   # run the test suite for this script
+```
+
+## Experiments
+
+### Creating a New Experiment
+
+`scripts/new_experiment.sh` creates a timestamped folder under `experiments/` with a `labnote.md`, a starter `notebook.ipynb` filled in from `templates/` and an empty `figures/` for the notebook to save into.
+
+```bash
+pixi run new-experiment --description "good dog"   # makes experiments/2026-10-27-2210-good-dog/
 ```
