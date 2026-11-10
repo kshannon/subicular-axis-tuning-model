@@ -13,7 +13,7 @@ RESULTS_NB = MAIN / "results" / "sfn-2026" / "sfn_2026_results_section"
 POSTER_DOCS = MAIN / "tmp" / "sfn_2026_poster"   # Kyle keeps the speech and brief in the gitignored tmp folder
 MAX_WIDTH = 1800   # px, the widest a figure is shown
 
-FIGURE_2 = ["12_chance_boxes_grey.png", "13_counts_and_fit.png", "13_counts_and_fit_legend.png", "14_trained_against_chance.png", "14_trained_against_chance_labelled.png", "14_trained_against_chance_legend.png"]
+FIGURE_2 = ["12_chance_boxes_grey.png", "13_counts_and_fit.png", "13_counts_and_fit_legend.png", "14_trained_against_chance.png", "14_trained_against_chance_labelled.png", "14_trained_against_chance_labelled_legend.png", "14_trained_against_chance_legend.png"]
 
 
 def copy_image(src: Path, dst: Path) -> None:
